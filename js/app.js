@@ -1,25 +1,52 @@
 
 var Enemy = function() {
     this.sprite = 'images/enemy-bug.png';
-    this.y = getRow();
+    this.y = this.getRandomRow();
     this.x = -50;
-    this.speed = getSpeed();
+    this.speed = Math.random() * (15- 5)+1;
+};
+
+Enemy.prototype.getRandomRow = function(){
+    var id = Math.round(Math.random() * (3 - 1)+1);
+    switch(id) {
+        case 1:
+          return  55;
+        case 2:
+          return  140;
+        case 3:
+         return  225;
+    }
 };
 
 Enemy.prototype.update = function(dt) {
-    checkCollision(this.x, this.y);
+    this.checkCollision();
     if(this.x < 525) {
         this.x = this.x + this.speed;
     }else{
         //resets the enemy position and speed
         this.x = -50;
-        this.y = getRow();
-        this.speed = getSpeed();
+        this.y = this.getRandomRow();
+        this.speed = Math.random() * (15- 5)+1;
     }
 };
 
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+Enemy.prototype.checkCollision = function(){
+        //https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+        var rect1 = {x: this.x, y: this.y, width: 50, height: 50};
+        var rect2 = {x: player.x, y: player.y, width: 50, height: 50};
+
+        if (rect1.x < rect2.x + rect2.width &&
+           rect1.x + rect1.width > rect2.x &&
+           rect1.y < rect2.y + rect2.height &&
+           rect1.height + rect1.y > rect2.y) {
+            // collision detected!
+                player.x = 200;
+                player.y = 400;
+        }
 };
 
 var Player = function(){
@@ -34,7 +61,8 @@ var Player = function(){
 Player.prototype.update = function(dt){
     this.speed = this.speed * dt;
     if(this.y < 60){
-        playerReset();
+            this.x = 200;
+            this.y = 400;
     }
 };
 
@@ -44,7 +72,6 @@ Player.prototype.reset = function(){
 };
 
 Player.prototype.render = function(){
-    console.log('player x=' + this.x + ', y=' + this.y);
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
@@ -98,44 +125,3 @@ document.addEventListener('keyup', function(e) {
     };
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
-function getRow(){
-    //function to randomly set the row for enemy
-    var id = Math.round(Math.random() * (3 - 1)+1);
-    switch(id) {
-        case 1:
-          return 55;
-        case 2:
-          return 55+85;
-        case 3:
-         return 55+85+85;
-    }
-}
-
-function getSpeed(){
-    //sets a random speed
-    return Math.random() * (15- 5)+1;
-}
-
-function checkCollision(){
-    allEnemies.forEach(function(e) {
-        //https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
-        var rect1 = {x: e.x, y: e.y, width: 50, height: 50};
-        var rect2 = {x: player.x, y: player.y, width: 50, height: 50};
-
-        if (rect1.x < rect2.x + rect2.width &&
-           rect1.x + rect1.width > rect2.x &&
-           rect1.y < rect2.y + rect2.height &&
-           rect1.height + rect1.y > rect2.y) {
-            // collision detected!
-            playerReset();
-        }
-    });
-
-
-}
-
-function playerReset(){
-    player.x = 200;
-    player.y = 400;
-}
