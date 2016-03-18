@@ -1,5 +1,7 @@
 Instructions
+
 Requirements: Compatable Browser and Keyboard
+
 Objective: Move your character across the path towards the water while avoiding bugs!
 
     Move your Character Left, Right, Up or Down using the keyboard Arrow Buttons
