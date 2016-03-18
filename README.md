@@ -1,6 +1,6 @@
-frontend-nanodegree-arcade-game
-===============================
+Instructions
+Objective: Move your character across the path towards the water while avoiding bugs!
 
-Students should use this [rubric](https://www.udacity.com/course/viewer/#!/c-nd001/l-2696458597/m-2687128535) for self-checking their submission.
-
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+    Move your Character Left, Right, Up or Down using the keyboard Arrow Buttons
+    If you run into a bug you will start over, avoid them at all cost
+    Reach the water without touching a bug to Win!
