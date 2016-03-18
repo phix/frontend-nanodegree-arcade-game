@@ -80,23 +80,23 @@ Player.prototype.handleInput = function(allowedKeys){
   var xslide = 100;  
   switch (allowedKeys) {
     case 'left': // Left
-        if(player.x > 0){
-            player.x = player.x - xslide;  
+        if(this.x > 0){
+            this.x = this.x - xslide;  
         }
     break;
     case 'up': // Up
-        if(player.y > 50){
-            player.y = player.y - ystep; 
+        if(this.y > 50){
+            this.y = this.y - ystep; 
         }
     break;
     case 'right': // Right
-        if(player.x < 400){
-           player.x = player.x + xslide; 
+        if(this.x < 400){
+           this.x = this.x + xslide; 
        }
     break;
     case 'down': // Down
-        if(player.y < 400){
-            player.y = player.y + ystep; 
+        if(this.y < 400){
+            this.y = this.y + ystep; 
         }
     break;
   }
